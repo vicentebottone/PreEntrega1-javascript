@@ -12,29 +12,30 @@ if (aviso.toLowerCase() === "si") {
 
   do {
     let mensaje = "Promociones en descuento:\n\n";
-  
-    for (let i = 0; i < promociones.length; i++) {
-      mensaje += `${i + 1}. ${promociones[i].nombre}: $${promociones[i].precio}\n`;
-    }
-    
+
+    promociones.forEach((promocion, index) => {
+      mensaje += `${index + 1}. ${promocion.nombre}: $${promocion.precio}\n`;
+    });
+
     alert(mensaje);
-    
+
     let opcion = parseInt(prompt("Seleccione el número de la promoción que desea:"));
-    
-    if (opcion >= 1 && opcion <= promociones.length) {
-      let seleccion = promociones[opcion - 1];
+
+    let seleccion = promociones.find((promocion, index) => index + 1 === opcion);
+
+    if (seleccion) {
       totalCompra += seleccion.precio;
       alert(`Usted ha seleccionado la promoción: ${seleccion.nombre}`);
     } else {
       console.log("Opción inválida. No puede ingresar. Lo sentimos.");
     }
-    
+
     let respuesta = prompt("¿Desea comprar algo más? (si/no)");
     seguirComprando = respuesta.toLowerCase() === "si";
   } while (seguirComprando);
 
   alert(`El total de su compra es: $${totalCompra}`);
-  alert("Gracias por comprar en el bar de Vicente!");
+  alert("¡Gracias por comprar en el bar de Vicente!");
 } else {
   alert("No puede ingresar. Lo sentimos.");
 }
